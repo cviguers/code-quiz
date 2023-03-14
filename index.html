@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Code Quiz</title>
+</head>
+<body>
+    <!-- homepage -->
+    <div class="home-container" id="home-container">
+        <h1>this is the code quiz.</h1>
+        <p>take it if you think you're smart enough.</p>
+        <div class="start-btn-container">
+            <button class="start-btn" id="start-btn" type="button">start game</button>
+    
+        </div>
+    </div>
+
+    <!-- questions -->
+    <div class="quiz-container" hidden>
+        <div class="question-container">
+            <h2 class="question" id="question">question</h2>
+            <div class="btn-container">
+                <button class="btn">answer 1</button>
+                <button class="btn">answer 2</button>
+                <button class="btn">answer 3</button>
+                <button class="btn">answer 4</button>
+            </div>
+            <div class="next-btn-container">
+            <button class="next-btn" id="next-btn" type="button">next</button>
+            </div>
+        </div>
+    </div>
+    <!-- timer -->
+    <div class="time" style="text-align:right;">
+        <div id="main"></div>
+    </div>
+
+
+
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
