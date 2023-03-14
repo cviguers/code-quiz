@@ -39,6 +39,33 @@ answer2.setAttribute("style", " color: #cbece0; background: #e0cbec; border-radi
 answer3.setAttribute("style", " color: #cbece0; background: #e0cbec; border-radius: 100px; font-size: 18px; padding: 7px 20px; border: 0; margin: 50px; font-weight:bold; ");
 answer4.setAttribute("style", " color: #cbece0; background: #e0cbec; border-radius: 100px; font-size: 18px; padding: 7px 20px; border: 0; margin: 50px; font-weight:bold; ");
 
+// global variables
+var questionArray = [
+  {question: "Which method adds a new item to the end of an array and returns the new length?",
+  options: ["shift()", "return()", "push()", "pop()"],
+  answer: "push()"},
+
+  {question: "Which of the following is NOT a Git commd?",
+  options:["pwd", "Rm -rf", "mkdir", "new"],
+  answer: "new"},
+
+  {question: "Which display styling hides an element from the page?",
+  options: ["none", "inline", "block", "empty"],
+  answer: "none"},
+
+  {question: "Which of the following is NOT a primitive type in JavaScript?",
+  options: ["string", "array", "boolean", "undefined"],
+  answer: "array"},
+
+  {question: "After creating an element in JavaScript, to see it on the page you need to _________ .",
+  options:["document.getElementById", "element.appendChild", "element.textContent", "element.setAttribute"],
+  answer: "element.appendChild"},
+  ];
+
+var userAnswers = ["","","","",""];
+var userCorrect = 0;
+var userIncorrect = 0;
+var userScore = 0;
 
 // start timer
 function setTime() {
