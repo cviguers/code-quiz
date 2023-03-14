@@ -11,7 +11,7 @@
 
 /* homepage */
 .home-container {
-    margin: 20px;
+    margin-top: 70px;
 }
 
 h1 {
@@ -46,17 +46,15 @@ p {
 /* timer */
 .time {
     color: var(--blue);
+    font-size: 18px;
     font-weight: bold;
     margin-right: 15px;
     margin-top: 20px;
 }
 
 /* quiz */
-.quiz-container {
-    margin: 20px;
-}
-
 .question-container {
+    margin: 20px;
     text-align: center;
     justify-content: center;
 }

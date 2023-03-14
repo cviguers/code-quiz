@@ -1,15 +1,39 @@
-// Selects element by class
+// js created elements
+var main = document.main;
+var questionContainer = document.createElement("div");
+var question = document.createElement("h2");
+var btnContainer = document.createElement("div");
+var answer1 = document.createElement("button");
+var answer2 = document.createElement("button");
+var answer3 = document.createElement("button");
+var answer4 = document.createElement("button");
+
+// selects element by class
 var timeEl = document.querySelector(".time");
 
-
-// Selects element by id
+// selects element by id
 var mainEl = document.getElementById("main");
 var startBtn = document.getElementById("start-btn");
 var homePage = document.getElementById("home-container");
 var quizPage = document.getElementById("quiz-container");
 
+// add text to js elements
+question.textContent = "question";
+answer1.textContent = "answer one";
+answer2.textContent = "answer two";
+answer3.textContent = "answer three";
+answer4.textContent = "answer four";
 
-// homepage
+// append js elements to html elements
+main.appendChild(questionContainer);
+questionContainer.appendChild(question);
+questionContainer.appendChild(btnContainer);
+btnContainer.appendChild(answer1);
+btnContainer.appendChild(answer2);
+btnContainer.appendChild(answer3);
+btnContainer.appendChild(answer4);
+
+// start timer
 function setTime() {
   var secondsLeft = 75;
   // Sets interval in variable
@@ -27,6 +51,7 @@ function setTime() {
   }, 1000);
 };
 
+// hide homepage
 function hideHomepage() {
   if (homePage.style.display === "none") {
     homePage.style.display = "block";
@@ -35,14 +60,18 @@ function hideHomepage() {
   }
 };
 
-function showQuizpage() {
-  if (quizPage.style.display === "block") {
-    quizPage.style.display = "none";
-  } else {
-    quizPage.style.display = "block";
-  }
+// start quiz
+function showQuizpage () {
+
+}
+
+// end quiz
+function endGame() {
+
 };
 
+
+// call functions at click
 startBtn.addEventListener("click",function() {
   setTime()
   hideHomepage()
