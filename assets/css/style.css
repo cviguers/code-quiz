@@ -1,12 +1,12 @@
 :root {
-    --blue: #cbece0; 
+    --blue: #d4fffb; 
     --neutral: #e0cbec;
     --correct: #d7eccb;
     --incorrect: #eccfcb;
 }
 
 * {
-    background-color: rgb(234, 204, 209);
+    background-color: rgb(243, 231, 233);
 }
 
 /* homepage */
