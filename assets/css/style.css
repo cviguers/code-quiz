@@ -26,6 +26,13 @@ p {
     text-align: center;
 }
 
+.p2 {
+    margin: 10px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
 .start-btn-container {
     display: flex;
     justify-content: center;
