@@ -34,7 +34,7 @@ var userAnswers = ["","","","",""];
 var userCorrect = 0;
 var userIncorrect = 0;
 var userScore = 0;
-var questionIndex = -1;
+var questionIndex = 0;
 
 
 // start timer
@@ -104,5 +104,6 @@ startBtn.addEventListener("click",function() {
   setTime();
   hideHomepage();
   questionContainer.setAttribute("style", "display = block;");
+  startQuestions ();
   // add other functions that start when you click start
 });
