@@ -79,11 +79,11 @@ function startQuestions () {
   var answer4 = document.createElement("button");
 
   // add text to js elements
-  question.textContent = questionArray(questionIndex[i]).question;
-  answer1.textContent = questionArray(questionIndex[i]).options[0];
-  answer2.textContent = questionArray(questionIndex[i]).options[1];
-  answer3.textContent = questionArray(questionIndex[i]).options[2];
-  answer4.textContent = questionArray(questionIndex[i]).options[3];
+  question.textContent = questionArray[questionIndex].question;
+  answer1.textContent = questionArray[questionIndex].options[0];
+  answer2.textContent = questionArray[questionIndex].options[1];
+  answer3.textContent = questionArray[questionIndex].options[2];
+  answer4.textContent = questionArray[questionIndex].options[3];
 
   // append js elements to html elements
   mainEl.appendChild(questionContainer);
