@@ -81,18 +81,21 @@ function startQuestions () {
 
     // add text to js elements
     question.textContent = questionArray[questionIndex].question;
-    answerBtn.textContent = questionArray[questionIndex].options; 
+    answerBtn.textContent = questionArray[questionIndex].options[i];
+    nextBtn.textContent = "Next";
 
     // append js elements to html elements
     mainEl.appendChild(questionContainer);
     questionContainer.appendChild(question);
     questionContainer.appendChild(btnContainer);
     btnContainer.appendChild(answerBtn);
-    btnContainer.appendChild(answerBtn);
+    btnContainer.appendChild(nextBtn);
 
     // styles js elements
     questionContainer.setAttribute("style", " margin:auto; width:50%; text-align:center; display: block; ");
     answerBtn.setAttribute("style", " color: #cbece0; background: #e0cbec; border-radius: 100px; font-size: 18px; padding: 7px 20px; border: 0; margin: 50px; font-weight:bold; ");
+    nextBtn.setAttribute("style", " color: #cbece0; background: #e0cbec; border-radius: 100px; font-size: 18px; padding: 7px 20px; border: 0; margin: 50px; font-weight:bold; ");
+
   }
   // runs through each question
   questionIndex++
