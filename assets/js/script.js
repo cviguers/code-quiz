@@ -73,41 +73,33 @@ function startQuestions () {
   var questionContainer = document.createElement("div");
   var question = document.createElement("h2");
   var btnContainer = document.createElement("div");
-  var answer1 = document.createElement("button");
-  var answer2 = document.createElement("button");
-  var answer3 = document.createElement("button");
-  var answer4 = document.createElement("button");
+  var nextBtn = document.createElement("button");
 
-  // add text to js elements
-  question.textContent = questionArray[questionIndex].question;
-  answer1.textContent = questionArray[questionIndex].options[0];
-  answer2.textContent = questionArray[questionIndex].options[1];
-  answer3.textContent = questionArray[questionIndex].options[2];
-  answer4.textContent = questionArray[questionIndex].options[3];
+  // for loop to run through each item in question array
+  for(var i = 0; i < questionArray[questionIndex].options.length; i++){
+    var answerBtn = document.createElement("button");
 
-  // append js elements to html elements
-  mainEl.appendChild(questionContainer);
-  questionContainer.appendChild(question);
-  questionContainer.appendChild(btnContainer);
-  btnContainer.appendChild(answer1);
-  btnContainer.appendChild(answer2);
-  btnContainer.appendChild(answer3);
-  btnContainer.appendChild(answer4);
+    // add text to js elements
+    question.textContent = questionArray[questionIndex].question;
+    answerBtn.textContent = questionArray[questionIndex].options; 
 
-  // styles js elements
-  questionContainer.setAttribute("style", " margin:auto; width:50%; text-align:center; display: block; ");
-  answer1.setAttribute("style", " color: #cbece0; background: #e0cbec; border-radius: 100px; font-size: 18px; padding: 7px 20px; border: 0; margin: 50px; font-weight:bold; ");
-  answer2.setAttribute("style", " color: #cbece0; background: #e0cbec; border-radius: 100px; font-size: 18px; padding: 7px 20px; border: 0; margin: 50px; font-weight:bold; ");
-  answer3.setAttribute("style", " color: #cbece0; background: #e0cbec; border-radius: 100px; font-size: 18px; padding: 7px 20px; border: 0; margin: 50px; font-weight:bold; ");
-  answer4.setAttribute("style", " color: #cbece0; background: #e0cbec; border-radius: 100px; font-size: 18px; padding: 7px 20px; border: 0; margin: 50px; font-weight:bold; ");
+    // append js elements to html elements
+    mainEl.appendChild(questionContainer);
+    questionContainer.appendChild(question);
+    questionContainer.appendChild(btnContainer);
+    btnContainer.appendChild(answerBtn);
+    btnContainer.appendChild(answerBtn);
 
+    // styles js elements
+    questionContainer.setAttribute("style", " margin:auto; width:50%; text-align:center; display: block; ");
+    answerBtn.setAttribute("style", " color: #cbece0; background: #e0cbec; border-radius: 100px; font-size: 18px; padding: 7px 20px; border: 0; margin: 50px; font-weight:bold; ");
+  }
   // runs through each question
   questionIndex++
   };
 
 // call functions at click of start button
 startBtn.addEventListener("click",function() {
-  setTime();
   hideHomepage();
   startQuestions ();
   // add other functions that start when you click start
