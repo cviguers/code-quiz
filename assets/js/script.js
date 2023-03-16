@@ -30,16 +30,16 @@ var questionArray = [
   answer: "element.appendChild"},
   ];
 
-var userAnswers = ["","","","",""];
-var userCorrect = 0;
-var userIncorrect = 0;
+var userAnswer = "";
 var userScore = 0;
 var questionIndex = 0;
+var secondsLeft = 75;
+var pentalty = 5;
+var answer = questionArray[answer]
 
 
 // start timer
 function setTime() {
-  var secondsLeft = 75;
   // Sets interval in variable
   var timerInterval = setInterval(function() {
     secondsLeft--;
@@ -51,6 +51,7 @@ function setTime() {
       // Calls function to end quiz / show final score page
         //insert function!!!!!!!!!!!
     }
+
 
   }, 1000);
 };
@@ -84,7 +85,7 @@ function startQuestions () {
     answerBtn.textContent = questionArray[questionIndex].options[i];
     nextBtn.textContent = "Next";
 
-    // append js elements to html elements
+    // append js elements to page
     mainEl.appendChild(questionContainer);
     questionContainer.appendChild(question);
     questionContainer.appendChild(btnContainer);
@@ -95,15 +96,57 @@ function startQuestions () {
     questionContainer.setAttribute("style", " margin:auto; width:50%; text-align:center; display: block; ");
     answerBtn.setAttribute("style", " color: #cbece0; background: #e0cbec; border-radius: 100px; font-size: 18px; padding: 7px 20px; border: 0; margin: 50px; font-weight:bold; ");
     nextBtn.setAttribute("style", " color: #cbece0; background: #e0cbec; border-radius: 100px; font-size: 18px; padding: 7px 20px; border: 0; margin: 50px; font-weight:bold; ");
-
   }
+
+  // checks answer when user clicks next button
+  answerBtn.addEventListener("click", function()  {
+    checkAnswer();
+  });
+
   // runs through each question
   questionIndex++
   };
 
-// call functions at click of start button
+// calls functions to start quiz and hide homepage at click of start button
 startBtn.addEventListener("click",function() {
   hideHomepage();
+  // setTime(); removing questions from page?? 
   startQuestions ();
   // add other functions that start when you click start
 });
+
+
+//
+function checkAnswer(){
+  // allowing score to start at 0
+  var userCorrect = "";
+  var userIncorrect = "";
+
+  // creating elements to hold score
+  var Correct = document.createElement("p");
+  var Incorrect = document.createElement("p");
+  
+  // appends elements to page
+  mainEl.appendChild(Correct);
+  mainEl.appendChild(Incorrect);
+  
+  // adding styled text to score
+  Correct.textContent = userCorrect + " correct";
+  Incorrect.textContent = userIncorrect + " incorrect";
+  Correct.setAttribute("style", " font-size: 10px; ");
+  Incorrect.setAttribute("style", " font-size: 10px; ");
+
+  if(userAnswer === answer) {
+    userCorrect = userCorrect + 1;
+    // changes chosen answer green, if correct
+    answerBtn.setAttribute("style", " color: #cbece0; background: #d7eccb; border-radius: 100px; font-size: 18px; padding: 7px 20px; border: 0; margin: 50px; font-weight:bold; ");
+  }
+  else {
+    // adds to user's incorrct points
+    userIncorrect = userIncorrect + 1;
+    // deducts time from quiz
+    secondsLeft = secondsLeft - pentalty;
+    // changes user answer red, if incorrect
+    answerBtn.setAttribute("style", " color: #cbece0; background: #eccfcb; border-radius: 100px; font-size: 18px; padding: 7px 20px; border: 0; margin: 50px; font-weight:bold;");
+  };
+}
