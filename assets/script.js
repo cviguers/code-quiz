@@ -128,13 +128,7 @@ function startQuestions(questionIndex) {
 
 // run through questions
 function renderQuestions() {
-    startQuestions(questionIndex);
-    questionIndex++;
-  
-    // check if we've reached the end of the array
-    if (questionIndex >= questionArray.length) {
-      // function to end quiz
-    }
+  questionIndex = 0; questionIndex < questionArray[questionIndex].length; questionIndex++
   };
 
   // calculate and create score after game is over
@@ -179,7 +173,7 @@ startBtn.addEventListener("click", function () {
   hideHomepage();
   setTime(); 
   startQuestions(questionIndex);
-  // add other functions that start when you click start
+  renderQuestions()
 });
 
 nextBtn.addEventListener("click", function () {
