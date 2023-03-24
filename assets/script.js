@@ -1,6 +1,6 @@
 var timeEl = document.querySelector(".time");
 var quizPage = document.querySelector(".quiz-container");
-var highscorePage = document.querySelector(".highscore-container")
+var highscorePage = document.querySelector(".highscore-container");
 var mainEl = document.getElementById("main");
 var startBtn = document.getElementById("start-btn");
 var homePage = document.getElementById("home-container");
@@ -8,6 +8,9 @@ var answer1 = document.getElementById("answer1");
 var answer2 = document.getElementById("answer2");
 var answer3 = document.getElementById("answer3");
 var answer4 = document.getElementById("answer4");
+var feedback = document.querySelector(".feedback")
+var scorecard = document.querySelector(".scorecard")
+var answerBtn = document.querySelector(".answer-btn")
 
 // global variables
 var questionArray = [
@@ -50,31 +53,57 @@ var questionArray = [
 ];
 
 var userAnswer = "";
-var userScore = 0;
+var correct = 0;
+var incorrect = 0;
+var userScore = correct - incorrect;
 var secondsLeft = 5;
 var questionIndex = 0;
 var pentalty = -5;
 var answer = questionArray[answer];
 
 
+
+answerBtn.addEventListener("click", function(event){
+  renderAnswer(event)
+})
+
+// shows if answer is correct or incorrect
+function renderAnswer(event) {
+    if (event === questionArray[questionIndex].answer++) {
+      feedback.textContent = "correct, proceed to next question";
+      correct = +1
+    } else {
+      secondsLeft = secondsLeft - pentalty
+      feedback.textContent = "incorrect, proceed to next question";
+      incorrect = +1
+    }
+    correct.document.createElement('p')
+    incorrect.document.createElement('p')
+    correct.textContent = correct
+    incorrect.textContent = incorrect
+    scorecard.append(correct)
+    scorecard.append(incorrect)
+}
+
+
+
 // hides answer button
-function hideAnswer () {
-    answer1.style.display = "none";
-    answer2.style.display = "none";
-    answer3.style.display = "none";
-    answer4.style.display = "none";
-};
+function hideAnswer() {
+  answer1.style.display = "none";
+  answer2.style.display = "none";
+  answer3.style.display = "none";
+  answer4.style.display = "none";
+}
 
 // hides highscore page
 function hideHighscorePage() {
   highscorePage.style.display = "none";
-};
+}
 
 // removes quiz from page
 function endQuiz() {
   quizPage.style.display = "none";
-};
-
+}
 
 // start timer
 function setTime() {
@@ -110,98 +139,44 @@ function startQuestions(questionIndex) {
   // appends elements to page
   mainEl.innerHTML = "";
 
-  //creates elements in dom   
+  //creates elements in dom
   var questionContainer = document.createElement("div");
   var question = document.createElement("h2");
-  var nextBtn = document.createElement("button");  
+  var nextBtn = document.createElement("button");
 
-    // add text to question and answers
-    question.textContent = questionArray[questionIndex].question;
-    answer1.textContent = questionArray[questionIndex].options[0];
-    answer2.textContent = questionArray[questionIndex].options[1];
-    answer3.textContent = questionArray[questionIndex].options[2];
-    answer4.textContent = questionArray[questionIndex].options[3];
-    nextBtn.textContent = "Next";
-    
-    nextBtn.addEventListener("click", function () {
-      questionIndex++
-      startQuestions(questionIndex);
-    })
+  // add text to question and answers
+  question.textContent = questionArray[questionIndex].question;
+  answer1.textContent = questionArray[questionIndex].options[0];
+  answer2.textContent = questionArray[questionIndex].options[1];
+  answer3.textContent = questionArray[questionIndex].options[2];
+  answer4.textContent = questionArray[questionIndex].options[3];
+  nextBtn.textContent = "Next";
 
-    // append js elements to page
-    mainEl.appendChild(questionContainer);
-    mainEl.appendChild(question);
-    mainEl.appendChild(nextBtn);
-};
+  nextBtn.addEventListener("click", function () {
+    questionIndex++;
+    startQuestions(questionIndex);
+    if (questionIndex < questionArray[questionIndex].length) {
+      endQuiz();
+    } else if 
+       (questionIndex >= questionArray.length) {
+        endQuiz();
+        clearInterval(timeInterval);
+    }
+  });
 
-// run through questions
-function renderQuestions() {
-  startQuestions(questionIndex);
-  questionIndex = 0; questionIndex < questionArray[questionIndex].length; questionIndex++;
-};
-
-
-
-// calculate and create score
-function calculateScore() {
-
-};
+  // append js elements to page
+  mainEl.appendChild(questionContainer);
+  mainEl.appendChild(question);
+  mainEl.appendChild(nextBtn);
+}
 
 // START JAVASCRIPT FUNCTIONS
-hideAnswer()
-hideHighscorePage()
+hideAnswer();
+hideHighscorePage();
 
 // calls functions to start quiz and hide homepage at click of start button
 startBtn.addEventListener("click", function () {
   hideHomepage();
-  setTime(); 
+  setTime();
   startQuestions(questionIndex);
-});
-
-
-
-// highscore page
-var name = document.querySelector("#name");
-var signUpButton = document.querySelector("#sign-up");
-var msgDiv = document.querySelector("#msg");
-var userNameSpan = document.querySelector("#user-name");
-var userHighscoreSpan = document.querySelector("#user-highscore");
-
-function hideHighscorePage() {
-  highscorePage.style.display = "none";
-};
-
-
-function renderLastRegistered() {
-  var name = localStorage.getItem("name");
-  var highscore = localStorage.getItem("highscore");
-
-  if (!name || !highscore) {
-    return;
-  }
-
-  userNameSpan.textContent = name;
-  userHighscoreSpan.textContent = highscore;
-}
-
-function displayMessage(type, message) {
-  msgDiv.textContent = message;
-  msgDiv.setAttribute("class", type);
-}
-
-signUpButton.addEventListener("click", function(event) {
-  event.preventDefault();
-
-  var name = document.querySelector("#name").value;
-  var highscore = document.querySelector("#highscore").value;
-
-  if (name === "") {
-    displayMessage("error", "name cannot be blank");
-  } else {
-    displayMessage("success", "recorded successfully");
-
-    localStorage.setItem("name", name);
-    localStorage.setItem("highscore", highscore);
-    renderLastRegistered();
-  }
 });
