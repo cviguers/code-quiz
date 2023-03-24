@@ -1,11 +1,6 @@
-// selects element by class
 var timeEl = document.querySelector(".time");
-var answerBtn = document.querySelector(".answer-btn");
 var quizPage = document.querySelector(".quiz-container");
 var highscorePage = document.querySelector(".highscore-container")
-
-
-// selects element by id
 var mainEl = document.getElementById("main");
 var startBtn = document.getElementById("start-btn");
 var homePage = document.getElementById("home-container");
@@ -13,11 +8,6 @@ var answer1 = document.getElementById("answer1");
 var answer2 = document.getElementById("answer2");
 var answer3 = document.getElementById("answer3");
 var answer4 = document.getElementById("answer4");
-
-// js created elements
-var questionContainer = document.createElement("div");
-var question = document.createElement("h2");
-var nextBtn = document.createElement("button");
 
 // global variables
 var questionArray = [
@@ -63,7 +53,7 @@ var userAnswer = "";
 var userScore = 0;
 var secondsLeft = 5;
 var questionIndex = 0;
-var pentalty = 5;
+var pentalty = -5;
 var answer = questionArray[answer];
 
 
@@ -85,11 +75,6 @@ function endQuiz() {
   quizPage.style.display = "none";
 };
 
-// shows highscore page
-function showHighscore() {
-  highscorePage.style.display = "block";
-}
-
 
 // start timer
 function setTime() {
@@ -103,7 +88,6 @@ function setTime() {
       clearInterval(timerInterval);
       // Calls function to end quiz / show final score page
       endQuiz();
-      showHighscore();
     }
   }, 1000);
 }
@@ -140,7 +124,8 @@ function startQuestions(questionIndex) {
     nextBtn.textContent = "Next";
     
     nextBtn.addEventListener("click", function () {
-      renderQuestions();
+      questionIndex++
+      startQuestions(questionIndex);
     })
 
     // append js elements to page
@@ -155,39 +140,24 @@ function renderQuestions() {
   questionIndex = 0; questionIndex < questionArray[questionIndex].length; questionIndex++;
 };
 
-// 
 
 
+// calculate and create score
+function calculateScore() {
 
-  // calculate and create score after game is over
-// function calculateScore() {
-//   // create and append score to page
-//   var scoreEl = document.createElement("div");  
-//   var Correct = document.createElement("p");
-//   var Incorrect = document.createElement("p"); 
+};
 
-//   mainEl.appendChild(scoreEl);
-//   scoreEl.appendChild(Correct);
-//   scoreEl.appendChild(Incorrect);
+// START JAVASCRIPT FUNCTIONS
+hideAnswer()
+hideHighscorePage()
 
-//   //allowing score to start at 0
-//   var userCorrect = 0;
-//   var userIncorrect = 0;
+// calls functions to start quiz and hide homepage at click of start button
+startBtn.addEventListener("click", function () {
+  hideHomepage();
+  setTime(); 
+  startQuestions(questionIndex);
+});
 
-//   // adding labels to score
-//   Correct.textContent = userCorrect + " correct";
-//   Incorrect.textContent = userIncorrect + " incorrect";
-
-//   // 
-//   if (userAnswer == questionIndex[answer]) {
-//     userCorrect = userCorrect + 1;
-//   } else {
-//     // adds to user's incorrct points
-//     userIncorrect = userIncorrect + 1;
-//     // deducts time from quiz
-//     secondsLeft = secondsLeft - pentalty;
-//   }
-// };
 
 
 // highscore page
@@ -234,16 +204,4 @@ signUpButton.addEventListener("click", function(event) {
     localStorage.setItem("highscore", highscore);
     renderLastRegistered();
   }
-});
-
-
-// START JAVASCRIPT FUNCTIONS
-hideAnswer()
-hideHighscorePage()
-
-// calls functions to start quiz and hide homepage at click of start button
-startBtn.addEventListener("click", function () {
-  hideHomepage();
-  setTime(); 
-  startQuestions(questionIndex);
 });
