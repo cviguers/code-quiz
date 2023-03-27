@@ -18,25 +18,25 @@ var questionArray = [
     question:
       "Which method adds a new item to the end of an array and returns the new length?",
     options: ["shift()", "return()", "push()", "pop()"],
-    answer: "push()",
+    answer: 2,
   },
 
   {
     question: "Which of the following is NOT a Git commd?",
     options: ["pwd", "Rm -rf", "mkdir", "new"],
-    answer: "new",
+    answer: 3,
   },
 
   {
     question: "Which display styling hides an element from the page?",
     options: ["none", "inline", "block", "empty"],
-    answer: "none",
+    answer: 0,
   },
 
   {
     question: "Which of the following is NOT a primitive type in JavaScript?",
     options: ["string", "array", "boolean", "undefined"],
-    answer: "array",
+    answer: 1,
   },
 
   {
@@ -48,42 +48,91 @@ var questionArray = [
       "element.textContent",
       "element.setAttribute",
     ],
-    answer: "element.appendChild",
+    answer: 1,
   },
 ];
 
 var userAnswer = "";
-var correct = 0;
-var incorrect = 0;
-var userScore = correct - incorrect;
-var secondsLeft = 5;
+var userScore = 0;
+var secondsLeft = 75;
 var questionIndex = 0;
 var pentalty = -5;
-var answer = questionArray[answer];
 
 
 
-answerBtn.addEventListener("click", function(event){
-  renderAnswer(event)
+// 
+answer1.addEventListener("click", function(event){
+  event.preventDefault();
+    var correctAnswer = questionArray[questionIndex].answer;
+    // if click correct answer, notify user, increase and show score
+      if (0 === correctAnswer) {
+        console.log(correctAnswer)
+        feedback.textContent = "correct, proceed to next question";
+        userScore++
+        scorecard.textContent = "your current score is" + userScore;
+        // if user clicks incorrect answer, notifies user and deducts time
+      } else {
+        secondsLeft = secondsLeft - pentalty
+        feedback.textContent = "incorrect, proceed to next question";
+        scorecard.textContent = "your current score is" + userScore;      
+      }
+    
+    questionIndex++
 })
 
-// shows if answer is correct or incorrect
-function renderAnswer(event) {
-    if (event === questionArray[questionIndex].answer++) {
-      feedback.textContent = "correct, proceed to next question";
-      correct = +1
-    } else {
-      secondsLeft = secondsLeft - pentalty
-      feedback.textContent = "incorrect, proceed to next question";
-      incorrect = +1
-    }
-    correct.document.createElement('p')
-    incorrect.document.createElement('p')
-    correct.textContent = correct
-    incorrect.textContent = incorrect
-    scorecard.append(correct)
-    scorecard.append(incorrect)
-}
+answer2.addEventListener("click", function(event){
+  event.preventDefault();
+    var correctAnswer = questionArray[questionIndex].answer;
+    // if click correct answer, notify user, increase and show score
+      if (1 === correctAnswer) {
+        feedback.textContent = "correct, proceed to next question";
+        userScore++
+        scorecard.textContent = "your current score is" + userScore;
+        // if user clicks incorrect answer, notifies user and deducts time
+      } else {
+        secondsLeft = secondsLeft - pentalty
+        feedback.textContent = "incorrect, proceed to next question";
+        scorecard.textContent = "your current score is" + userScore;      
+      }
+    
+    questionIndex++
+})
+
+answer3.addEventListener("click", function(event){
+  event.preventDefault();
+    var correctAnswer = questionArray[questionIndex].answer;
+    // if click correct answer, notify user, increase and show score
+      if (2 === correctAnswer) {
+        feedback.textContent = "correct, proceed to next question";
+        userScore++
+        scorecard.textContent = "your current score is" + userScore;
+        // if user clicks incorrect answer, notifies user and deducts time
+      } else {
+        secondsLeft = secondsLeft - pentalty
+        feedback.textContent = "incorrect, proceed to next question";
+        scorecard.textContent = "your current score is" + userScore;      
+      }
+    
+    questionIndex++
+})
+
+answer4.addEventListener("click", function(event){
+  event.preventDefault();
+    var correctAnswer = questionArray[questionIndex].answer;
+    // if click correct answer, notify user, increase and show score
+      if (3 === correctAnswer) {
+        feedback.textContent = "correct, proceed to next question";
+        userScore++
+        scorecard.textContent = "your current score is" + userScore;
+        // if user clicks incorrect answer, notifies user and deducts time
+      } else {
+        secondsLeft = secondsLeft - pentalty
+        feedback.textContent = "incorrect, proceed to next question";
+        scorecard.textContent = "your current score is" + userScore;      
+      }
+    
+    questionIndex++
+})
 
 
 
@@ -112,7 +161,7 @@ function setTime() {
     secondsLeft--;
     timeEl.textContent = secondsLeft + " seconds remain";
 
-    if (secondsLeft === 0) {
+    if (secondsLeft === 0 || questionIndex >= questionArray.length) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
       // Calls function to end quiz / show final score page
@@ -120,6 +169,7 @@ function setTime() {
     }
   }, 1000);
 }
+
 
 // hide homepage and show answers
 function hideHomepage() {
@@ -162,6 +212,8 @@ function startQuestions(questionIndex) {
         endQuiz();
         clearInterval(timeInterval);
     }
+    scorecard.textContent = "";
+    feedback.textContent = "";
   });
 
   // append js elements to page
