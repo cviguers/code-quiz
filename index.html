@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link rel="stylesheet" href="./assets/css/reset.css" /> -->
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>code quiz: do you have what it takes?</title>
   </head>
@@ -12,10 +12,13 @@
     <!-- homepage -->
     <div class="home-container" id="home-container">
       <h1>this is the code quiz.</h1>
-      <p>press start if you think you can win.</p>
-      <p class="p2">
-        there are 5 questions, you have 75 seconds. best of luck.
+      <p>
+        there are 5 questions and 75 seconds. 10 seconds will be deducted for
+        each incorrect answer. press
+        <span style="font-weight: bolder">START GAME</span> when you're ready to
+        proceed.
       </p>
+      <p>best of luck.</p>
       <div class="start-btn-container">
         <button class="start-btn" id="start-btn" type="button">
           start game
@@ -24,7 +27,7 @@
     </div>
     <!-- timer and quiz -->
     <div class="quiz-container" style="text-align: right">
-      <h1 class="time"></h1>
+      <p class="time"></p>
       <div class="scorecard"></div>
       <div id="main"></div>
       <button class="answer-btn" id="answer1"></button>
@@ -32,6 +35,7 @@
       <button class="answer-btn" id="answer3"></button>
       <button class="answer-btn" id="answer4"></button>
       <div class="feedback"></div>
+      <button id="next-btn">next</button>
     </div>
     <!-- game over / submit score -->
     <section class="scorePage">
@@ -48,6 +52,7 @@
 
     <section>
       <ul id="scoreBoard"></ul>
+      <button type="button" id="refresh">try again</button>
     </section>
 
     <script src="./assets/js/script.js"></script>

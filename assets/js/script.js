@@ -18,6 +18,8 @@ var initialInput = document.querySelector("#submit-initials");
 var tryAgainBtn = document.querySelector("#try-again");
 var highscoreBtn = document.querySelector("#highscoreBtn");
 var scoreBoardList = document.querySelector("#scoreBoard");
+var refreshBtn = document.querySelector("#refresh");
+var nextBtn = document.querySelector("#next-btn");
 
 // global variables
 var questionArray = [
@@ -61,9 +63,9 @@ var questionArray = [
 
 var userAnswer = "";
 var userScore = 0;
-var secondsLeft = 5;
+var secondsLeft = 75;
 var questionIndex = 0;
-var pentalty = -10;
+var pentalty = 10;
 
 // determine if answer 1 is correct for each question
 answer1.addEventListener("click", function (event) {
@@ -71,18 +73,15 @@ answer1.addEventListener("click", function (event) {
   var correctAnswer = questionArray[questionIndex].answer;
   // if click correct answer, notify user, increase and show score
   if (0 === correctAnswer) {
-    console.log(correctAnswer);
     feedback.textContent = "correct, proceed to next question";
     userScore++;
-    scorecard.textContent = "your current score is" + userScore;
+    scorecard.textContent = "your current score is " + userScore;
     // if user clicks incorrect answer, notifies user and deducts time
   } else {
-    secondsLeft = secondsLeft - pentalty;
+    secondsLeft -= pentalty;
     feedback.textContent = "incorrect, proceed to next question";
-    scorecard.textContent = "your current score is" + userScore;
+    scorecard.textContent = "your current score is " + userScore;
   }
-
-  questionIndex++;
 });
 
 // determine if answer 2 is correct for each question
@@ -93,15 +92,14 @@ answer2.addEventListener("click", function (event) {
   if (1 === correctAnswer) {
     feedback.textContent = "correct, proceed to next question";
     userScore++;
-    scorecard.textContent = "your current score is" + userScore;
+    scorecard.textContent = "your current score is " + userScore;
     // if user clicks incorrect answer, notifies user and deducts time
   } else {
-    secondsLeft = secondsLeft + pentalty;
-    feedback.textContent = "incorrect, proceed to next question";
-    scorecard.textContent = "your current score is" + userScore;
-  }
+    secondsLeft -= pentalty;
 
-  questionIndex++;
+    feedback.textContent = "incorrect, proceed to next question";
+    scorecard.textContent = "your current score is " + userScore;
+  }
 });
 
 // determine if answer 3 is correct for each question
@@ -112,15 +110,13 @@ answer3.addEventListener("click", function (event) {
   if (2 === correctAnswer) {
     feedback.textContent = "correct, proceed to next question";
     userScore++;
-    scorecard.textContent = "your current score is" + userScore;
+    scorecard.textContent = "your current score is " + userScore;
     // if user clicks incorrect answer, notifies user and deducts time
   } else {
     secondsLeft = secondsLeft - pentalty;
     feedback.textContent = "incorrect, proceed to next question";
-    scorecard.textContent = "your current score is" + userScore;
+    scorecard.textContent = "your current score is " + userScore;
   }
-
-  questionIndex++;
 });
 
 // determine if answer 4 is correct for each question
@@ -131,15 +127,13 @@ answer4.addEventListener("click", function (event) {
   if (3 === correctAnswer) {
     feedback.textContent = "correct, proceed to next question";
     userScore++;
-    scorecard.textContent = "your current score is" + userScore;
+    scorecard.textContent = "your current score is " + userScore;
     // if user clicks incorrect answer, notifies user and deducts time
   } else {
     secondsLeft = secondsLeft - pentalty;
     feedback.textContent = "incorrect, proceed to next question";
-    scorecard.textContent = "your current score is" + userScore;
+    scorecard.textContent = "your current score is " + userScore;
   }
-
-  questionIndex++;
 });
 
 // hides answer buttons
@@ -148,6 +142,7 @@ function hideAnswer() {
   answer2.style.display = "none";
   answer3.style.display = "none";
   answer4.style.display = "none";
+  nextBtn.style.display = "none";
 }
 
 // removes quiz from page
@@ -183,6 +178,7 @@ function hideHomepage() {
   answer2.style.display = "inline";
   answer3.style.display = "inline";
   answer4.style.display = "inline";
+  nextBtn.style.display = "block";
 }
 
 // start questions
@@ -193,7 +189,6 @@ function startQuestions(questionIndex) {
   //creates elements in dom
   var questionContainer = document.createElement("div");
   var question = document.createElement("h2");
-  var nextBtn = document.createElement("button");
 
   // add text to question and answers
   question.textContent = questionArray[questionIndex].question;
@@ -201,26 +196,24 @@ function startQuestions(questionIndex) {
   answer2.textContent = questionArray[questionIndex].options[1];
   answer3.textContent = questionArray[questionIndex].options[2];
   answer4.textContent = questionArray[questionIndex].options[3];
-  nextBtn.textContent = "Next";
-
-  nextBtn.addEventListener("click", function () {
-    questionIndex++;
-    startQuestions(questionIndex);
-    if (questionIndex < questionArray[questionIndex].length) {
-      endQuiz();
-    } else if (questionIndex >= questionArray.length) {
-      endQuiz();
-      clearInterval(timeInterval);
-    }
-    scorecard.textContent = "";
-    feedback.textContent = "";
-  });
 
   // append js elements to page
   mainEl.appendChild(questionContainer);
   mainEl.appendChild(question);
-  mainEl.appendChild(nextBtn);
 }
+
+nextBtn.addEventListener("click", function () {
+  questionIndex++;
+  startQuestions(questionIndex);
+  if (questionIndex < questionArray[questionIndex].length) {
+    endQuiz();
+  } else if (questionIndex >= questionArray.length) {
+    endQuiz();
+    clearInterval(timeInterval);
+  }
+  scorecard.textContent = "";
+  feedback.textContent = "";
+});
 
 // call functions on page load
 hideAnswer();
@@ -252,7 +245,7 @@ var renderEndPage = function () {
   var scoreHeader = document.createElement("h2");
   var scoreReport = document.createElement("p");
   scoreHeader.textContent = "Game Over";
-  scoreReport.textContent = "Your final score is" + userScore;
+  scoreReport.textContent = "Your final score is " + userScore;
   highscorePage.append(scoreHeader);
   highscorePage.append(scoreReport);
 };
@@ -260,6 +253,7 @@ var renderEndPage = function () {
 var hideEndPage = function () {
   highscorePage.style.display = "none";
   scorePageEl.style.display = "none";
+  refreshBtn.style.display = "none";
 };
 
 hideEndPage();
@@ -289,6 +283,7 @@ var renderScore = function () {
     newLi.textContent = highscores[i].initials + ": " + highscores[i].userScore;
     scoreBoardList.appendChild(newLi);
   }
+  refreshBtn.style.display = "block";
 };
 
 // puts highscores in numeric order
@@ -300,3 +295,7 @@ var sortScores = function (array, key) {
     return -1;
   });
 };
+
+refreshBtn.addEventListener("click", function () {
+  location.reload();
+});
