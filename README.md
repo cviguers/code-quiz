@@ -28,7 +28,7 @@ THEN I can save my initials and my score
 ```
 
 ## Preview
-<img src="./assets/images/correctscreenshot.png"/>
+<img src="./assets/images/screenshot.png"/>
 
 ## Deployed Application
 https://cviguers.github.io/code-quiz/
